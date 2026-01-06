@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { OrganizationsModule } from './organizations/organizations.module';
 import { EventsModule } from './events/events.module';
+import { TicketsModule } from './tickets/tickets.module';
+import { RegistrationsModule } from './registrations/registrations.module';
 
 @Module({
   imports: [
@@ -40,6 +42,8 @@ import { EventsModule } from './events/events.module';
     UsersModule,
     OrganizationsModule,
     EventsModule,
+    TicketsModule,
+    RegistrationsModule,
   ],
 })
 export class AppModule {}
