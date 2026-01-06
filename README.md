@@ -60,11 +60,13 @@ tukki-event/
 - Role-based access control (RBAC)
 - Secure password hashing
 
-### Phase 2 - Organizations (Coming Next)
+### Phase 2 - Organizations (✅ Complete)
 - Organization creation and management
-- Member invitations
+- Member invitations with role assignment
 - Role management (Owner, Admin, Staff)
-- Organization settings
+- Organization settings and customization
+- Permission-based access control
+- Member management (add, remove, update roles)
 
 ### Phase 3 - Events
 - Event creation and management
@@ -166,6 +168,17 @@ Once the server is running, visit http://localhost:3000/api/docs for the complet
 - `GET /api/v1/users/:id` - Get user by ID
 - `PATCH /api/v1/users/:id` - Update user
 - `DELETE /api/v1/users/:id` - Delete user (Admin only)
+
+#### Organizations
+- `POST /api/v1/organizations` - Create organization
+- `GET /api/v1/organizations` - Get user's organizations
+- `GET /api/v1/organizations/:id` - Get organization by ID
+- `PATCH /api/v1/organizations/:id` - Update organization (Owner/Admin)
+- `DELETE /api/v1/organizations/:id` - Delete organization (Owner only)
+- `POST /api/v1/organizations/:id/members` - Invite member (Owner/Admin)
+- `GET /api/v1/organizations/:id/members` - Get organization members
+- `PATCH /api/v1/organizations/:id/members/:userId` - Update member role (Owner/Admin)
+- `DELETE /api/v1/organizations/:id/members/:userId` - Remove member (Owner/Admin)
 
 ## Database Schema
 
@@ -296,7 +309,7 @@ NODE_ENV="development"
 ## Roadmap
 
 - [x] Phase 1: NestJS Setup & Authentication
-- [ ] Phase 2: Organizations Module
+- [x] Phase 2: Organizations Module
 - [ ] Phase 3: Events Module
 - [ ] Phase 4: Tickets & Registrations
 - [ ] Phase 5: Payment Integration
