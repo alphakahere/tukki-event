@@ -68,11 +68,14 @@ tukki-event/
 - Permission-based access control
 - Member management (add, remove, update roles)
 
-### Phase 3 - Events
+### Phase 3 - Events (✅ Complete)
 - Event creation and management
-- Event publishing workflow
-- Ticket configuration
-- Event search and filtering
+- Event publishing workflow (draft/published/unpublished)
+- Event status management (DRAFT, PUBLISHED, ONGOING, COMPLETED, CANCELLED)
+- Event search and filtering with advanced queries
+- Capacity management and tracking
+- Location and venue details
+- Auto-generated URL slugs
 
 ### Phase 4 - Registrations & Payments
 - User registration for events
@@ -179,6 +182,17 @@ Once the server is running, visit http://localhost:3000/api/docs for the complet
 - `GET /api/v1/organizations/:id/members` - Get organization members
 - `PATCH /api/v1/organizations/:id/members/:userId` - Update member role (Owner/Admin)
 - `DELETE /api/v1/organizations/:id/members/:userId` - Remove member (Owner/Admin)
+- `GET /api/v1/organizations/:id/events` - Get organization events
+
+#### Events
+- `POST /api/v1/events` - Create event
+- `GET /api/v1/events` - Get all events with filters and search
+- `GET /api/v1/events/slug/:slug` - Get event by slug
+- `GET /api/v1/events/:id` - Get event by ID
+- `PATCH /api/v1/events/:id` - Update event (Owner/Admin)
+- `DELETE /api/v1/events/:id` - Delete event (Owner/Admin)
+- `POST /api/v1/events/:id/publish` - Publish event (Owner/Admin)
+- `POST /api/v1/events/:id/unpublish` - Unpublish event (Owner/Admin)
 
 ## Database Schema
 
@@ -310,7 +324,7 @@ NODE_ENV="development"
 
 - [x] Phase 1: NestJS Setup & Authentication
 - [x] Phase 2: Organizations Module
-- [ ] Phase 3: Events Module
+- [x] Phase 3: Events Module
 - [ ] Phase 4: Tickets & Registrations
 - [ ] Phase 5: Payment Integration
 - [ ] Phase 6: Next.js Frontend

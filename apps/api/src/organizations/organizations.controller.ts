@@ -23,13 +23,18 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../common/decorators/current-user.decorator';
 import { OrganizationEntity } from './entities/organization.entity';
 import { OrganizationMemberEntity } from './entities/organization-member.entity';
+import { EventsService } from '../events/events.service';
+import { EventEntity } from '../events/entities/event.entity';
 
 @ApiTags('Organizations')
 @Controller('organizations')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth()
 export class OrganizationsController {
-  constructor(private readonly organizationsService: OrganizationsService) {}
+  constructor(
+    private readonly organizationsService: OrganizationsService,
+    private readonly eventsService: EventsService,
+  ) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a new organization' })
@@ -174,5 +179,22 @@ export class OrganizationsController {
       targetUserId,
       currentUserId,
     );
+  }
+
+  // ==================== EVENTS ====================
+
+  @Get(':id/events')
+  @ApiOperation({ summary: 'Get all events for organization' })
+  @ApiResponse({
+    status: 200,
+    description: 'Events retrieved successfully',
+    type: [EventEntity],
+  })
+  @ApiResponse({ status: 403, description: 'Not a member of this organization' })
+  getEvents(
+    @Param('id') organizationId: string,
+    @CurrentUser('id') userId: string,
+  ) {
+    return this.eventsService.findByOrganization(organizationId, userId);
   }
 }
